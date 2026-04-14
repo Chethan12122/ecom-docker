@@ -1,0 +1,22 @@
+.container {
+  padding: 20px;
+  font-family: Arial;
+}
+
+.input {
+  margin: 5px;
+  padding: 8px;
+}
+
+.button {
+  margin: 5px;
+  padding: 8px 12px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.list-item {
+  margin: 10px 0;
+}
