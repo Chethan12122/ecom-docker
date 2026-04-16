@@ -3,10 +3,12 @@ version: "3"
 services:
   backend:
     build: ./ecom_django/ecommerce
+    container_name: backend   # 👈 add this
     ports:
       - "8000:8000"
 
   frontend:
     build: ./frontend
+    container_name: frontend  # 👈 add this
     ports:
       - "5173:5173"
