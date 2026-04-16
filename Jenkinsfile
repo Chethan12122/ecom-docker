@@ -17,19 +17,20 @@ pipeline {
 
         stage('Run Containers') {
             steps {
-                bat 'docker-compose up -d'
+                 bat 'docker-compose down'
+                 bat 'docker-compose up -d'
             }
         }
 
         stage('Run Backend Tests') {
             steps {
-                bat 'docker exec backend python manage.py test || exit 0'
+                bat 'docker exec backend python manage.py test'
             }
         }
 
         stage('Run Frontend Build') {
             steps {
-                bat 'docker exec frontend npm run build || exit 0'
+                bat 'docker exec frontend npm run build '
             }
         }
 
