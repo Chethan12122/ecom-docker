@@ -17,8 +17,8 @@ pipeline {
 
         stage('Run Containers') {
             steps {
-                 bat 'docker-compose down'
-                 bat 'docker-compose up -d'
+                bat 'docker-compose down'
+                bat 'docker-compose up -d'
             }
         }
 
@@ -30,19 +30,22 @@ pipeline {
 
         stage('Run Frontend Build') {
             steps {
-                bat 'docker exec frontend npm run build '
+                bat 'docker exec frontend npm run build'
             }
         }
 
-        stage('Cleanup Old Containers') {
+        stage('Deploy to Render') {
+            steps {
+                echo 'Triggering Render Deploy...'
+                withCredentials([string(credentialsId: 'RENDER_DEPLOY_URL', variable: 'DEPLOY_URL')]) {
+                    bat 'curl -X POST %DEPLOY_URL%'
+                }
+            }
+        }
+
+        stage('Cleanup') {
             steps {
                 bat 'docker system prune -f'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploy step'
             }
         }
     }
